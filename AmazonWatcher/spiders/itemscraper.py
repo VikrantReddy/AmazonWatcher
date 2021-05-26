@@ -30,6 +30,6 @@ class ItemscraperSpider(scrapy.Spider):
             price = response.xpath('//*[@id="priceblock_dealprice"]/text()').extract_first()
         price = "".join(i for i in price if i.isdigit() or i == ".").split(".")[0]
         
-        item = AmazonItem(title,response.url,price,1)
+        item = AmazonItem(title,response.request.url,price,1)
 
         yield item

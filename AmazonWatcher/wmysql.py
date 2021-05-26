@@ -63,7 +63,7 @@ class sql_queries:
         if not item:
             self.wsql.execute(f"INSERT INTO items(url) VALUES('{url}')")
         else:
-            self.wsql.execute(f"UPDATE items SET name = '{item.name}',price = '{item.price}' WHERE item_id={item.item_id}")
+            self.wsql.execute(f"UPDATE items SET name = '{item.name}',price = '{item.price}' WHERE url='{item.url}'")
 
     def update_item(self,item):
         self.wsql.execute(f"INSERT INTO items(price) VALUES('{item.price}') WHERE id = {item.item_id}")
