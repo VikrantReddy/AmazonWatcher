@@ -12,7 +12,7 @@ class ItemscraperSpider(scrapy.Spider):
     def start_requests(self):
         user_agent_rotator = UserAgent(operating_systems=[OperatingSystem.LINUX.value,OperatingSystem.WINDOWS.value],limit=100)
         start_urls = [
-                            'https://www.amazon.in/boAt-BassHeads-100-Headphones-Black/dp/B071Z8M4KX/ref=lp_1389401031_1_1'
+                            'https://www.amazon.in/Blue-Tokai-Coffee-Roasters-Vienna/dp/B079684SRX/ref=sr_1_6'
                 ]
 
         for url in start_urls:  
@@ -28,7 +28,8 @@ class ItemscraperSpider(scrapy.Spider):
 
         if not price:
             price = response.xpath('//*[@id="priceblock_dealprice"]/text()').extract_first()
-        price = "".join(i for i in price if i.isdigit() or i == ".")
-        item = AmazonItem(title,"",price)
+        price = "".join(i for i in price if i.isdigit() or i == ".").split(".")[0]
+        
+        item = AmazonItem(title,response.url,price,1)
 
         yield item

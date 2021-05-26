@@ -10,6 +10,7 @@ class AmazonItem:
     name: str
     url : str
     price: int
+    item_id: int
 
 @dataclass
 class User:

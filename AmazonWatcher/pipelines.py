@@ -6,8 +6,10 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-
+from AmazonWatcher.sqldb import sqldb
 
 class AmazonwatcherPipeline:
+
     def process_item(self, item, spider):
+        sqldb.add_item(item=item)
         return item
