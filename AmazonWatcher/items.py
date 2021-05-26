@@ -16,13 +16,17 @@ class AmazonItem:
 class User:
     name: str
     email: str
-    uid : str
+    uid : int
     reqcount : int
+    verified: bool
 
 @dataclass
 class Requests:
-    rid: str
-    uid: str
+    rid: int
+    uid: int
+    item_id: int
     conditon: str
     last_executed: str
+    expiry: str
+    frequency: str
     
