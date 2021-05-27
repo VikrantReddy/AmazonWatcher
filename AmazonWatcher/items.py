@@ -25,7 +25,7 @@ class Requests:
     rid: int
     uid: int
     item_id: int
-    conditon: str
+    condition: str
     last_executed: str
     expiry: str
     frequency: str

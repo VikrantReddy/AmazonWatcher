@@ -6,7 +6,7 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-from AmazonWatcher.sqldb import sqldb
+from Amazon.Utils.sqldb import sqldb
 
 class AmazonwatcherPipeline:
 

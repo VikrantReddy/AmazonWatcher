@@ -1,6 +1,7 @@
 import mysql.connector
 import os
 import logging
+import time
 
 class wmysql():
     def __init__(self, host=None, **kwargs):
@@ -59,6 +60,19 @@ class sql_queries:
                 "price MEDIUMINT"
             ]
         )
+
+        self.declare_table(
+            "requests",[
+                "rid SMALLINT AUTO_INCREMENT PRIMARY KEY NOT NULL",
+                "uid SMALLINT",
+                "item_id SMALLINT",
+                "condn VARCHAR(20) NOT NULL",
+                "last_executed INT UNSIGNED DEFAULT NULL",
+                "frequency MEDIUMINT UNSIGNED NOT NULL",
+                "expiry MEDIUMINT UNSIGNED NOT NULL"
+            ]
+        )
+
     def add_item(self,url=None,item=None):
         if not item:
             self.wsql.execute(f"INSERT INTO items(url) VALUES('{url}')")
@@ -67,3 +81,19 @@ class sql_queries:
 
     def update_item(self,item):
         self.wsql.execute(f"INSERT INTO items(price) VALUES('{item.price}') WHERE id = {item.item_id}")
+    
+    def add_request(self,request):
+        self.wsql.execute(f'''INSERT INTO requests VALUES({request.rid},{request.uid},{request.item_id},'{request.condition}',{request.last_executed},
+                            {request.frequency},{request.expiry})''')
+
+    def update_request(self,rid,last_executed):
+        self.wsql.execute(f"UPDATE requests SET last_executed = {last_executed} WHERE rid='{rid}'")
+
+    def delete_request(self,rid):
+        self.wsql.execute(f"DELETE FROM requests WHERE rid = {rid}")
+    
+    def get_todo(self):
+        timestamp = str(int(time.time()))
+        return self.wsql.execute(
+            f"SELECT * FROM requests WHERE last_executed - {timestamp} > frequency"
+        )
