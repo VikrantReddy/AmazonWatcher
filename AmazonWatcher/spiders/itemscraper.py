@@ -1,9 +1,10 @@
 import scrapy
+from fp.fp import FreeProxy
+from random_user_agent.params import OperatingSystem
+from random_user_agent.user_agent import UserAgent
+
 from AmazonWatcher.items import AmazonItem
 
-from fp.fp import FreeProxy
-from random_user_agent.user_agent import UserAgent
-from random_user_agent.params import OperatingSystem
 
 class ItemscraperSpider(scrapy.Spider):
     name = 'itemscraper'

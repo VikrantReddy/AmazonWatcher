@@ -5,6 +5,7 @@
 
 from dataclasses import dataclass
 
+
 @dataclass    
 class AmazonItem:
     name: str

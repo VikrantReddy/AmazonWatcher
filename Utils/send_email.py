@@ -1,5 +1,6 @@
-import yagmail
 import os
+
+import yagmail
 
 yag = yagmail.SMTP(os.environ.get("EMAIL"),os.environ.get("EMAIL_PASSWORD"))
 
