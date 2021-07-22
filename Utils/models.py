@@ -1,16 +1,9 @@
-import pymysql
-pymysql.install_as_MySQLdb()
-
-import sqlalchemy
-from urllib.parse import quote_plus as urlquote
-import os
-
-engine = sqlalchemy.create_engine(f"mysql://{os.environ.get('AMAZONWATCHER_DATABASE_USER')}:{urlquote(os.environ.get('AMAZONWATCHER_DATABASE_PASSWORD'))}@localhost/{os.environ.get('AMAZONWATCHER_DATABASE')}")
-
-from sqlalchemy import Column, Integer, String, ForeignKey, Table
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy import Column, ForeignKey, Integer, String, Table
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import backref, relationship
 from sqlalchemy.types import Boolean
+
+from .sqldb import engine
 
 Base = declarative_base()
 
