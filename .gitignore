@@ -3,3 +3,9 @@ __pycache__/
 
 dms
 urls.csv
+
+secrets.json
+
+*.egg-info/
+build/
+dist/
