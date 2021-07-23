@@ -6,20 +6,22 @@
 from dataclasses import dataclass
 
 
-@dataclass    
+@dataclass
 class AmazonItem:
     name: str
-    url : str
+    url: str
     price: int
-    item_id: int
+    item_id: str
+
 
 @dataclass
 class User:
     name: str
     email: str
-    uid : int
-    reqcount : int
+    uid: int
+    reqcount: int
     verified: bool
+
 
 @dataclass
 class Requests:
@@ -30,4 +32,3 @@ class Requests:
     last_executed: str
     expiry: str
     frequency: str
-    

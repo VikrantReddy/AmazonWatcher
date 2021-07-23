@@ -6,10 +6,21 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-from Amazon.Utils.sqldb import sqldb
+from AmazonWatcher import engine
+from AmazonWatcher import schema
+from sqlalchemy import update
+from sqlalchemy.orm import Session
+
+OrmAmazonItem = schema.AmazonItem
+
 
 class AmazonwatcherPipeline:
 
     def process_item(self, item, spider):
-        sqldb.add_item(item=item)
+        session = Session(engine, future=True)
+        statement = update(OrmAmazonItem)\
+            .where(OrmAmazonItem.item_id == item.item_id)\
+            .values(price=item.price)
+        session.execute(statement)
+        session.commit()
         return item

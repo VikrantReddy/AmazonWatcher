@@ -1,6 +1,9 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from Amazon.Public import db
+from Amazon.Utils import User
 
 auth = Blueprint('auth', __name__)
 
